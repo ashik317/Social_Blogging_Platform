@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Post List{% endblock %}
+
+{% block content %}
+<style>
+    .post-list-container {
+        margin: 50px auto;
+        max-width: 800px;
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #f8f9fa;
+    }
+
+    .post-details {
+        flex-grow: 1;
+    }
+
+    .post-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-small {
+        padding: 5px 10px;
+        font-size: 0.85rem;
+    }
+
+    .btn-edit {
+        background-color: #007bff;
+        border: none;
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        border: none;
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background-color: #a71d2a;
+    }
+
+    .btn-primary {
+        display: block;
+        margin: 20px auto;
+        width: fit-content;
+    }
+</style>
+
+<div class="post-list-container">
+    <h2 class="text-center mb-4">Post List</h2>
+    <ul class="list-group">
+        {% for post in posts %}
+        <li class="list-group-item">
+            <div class="post-details">
+                <a href="{% url 'Blog_App:post_detail' post.pk %}" class="fw-bold">{{ post.title }}</a>
+                <p class="mb-0">By {{ post.author }} | Published on {{ post.created_at }}</p>
+            </div>
+            <div class="post-actions">
+                <a href="{% url 'Blog_App:post_update' pk=1 %}" class="btn btn-small btn-edit">Edit</a>
+                <form action="{% url 'Blog_App:post_delete' post.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-small btn-delete">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'Blog_App:post_create' %}" class="btn btn-primary">Create New Post</a>
+</div>
+{% endblock %}

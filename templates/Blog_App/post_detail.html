@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+    }
+
+    .post-container {
+        margin: 50px auto;
+        padding: 20px;
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .post-details {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+
+    .post-content {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .comments-section {
+        margin-top: 40px;
+    }
+
+    .comments-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .list-group-item {
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+    }
+
+    .comment-form {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        margin-top: 20px;
+    }
+</style>
+
+<script>
+    // Smooth scroll to the comment form
+    function scrollToCommentForm() {
+        document.getElementById("comment-form").scrollIntoView({ behavior: "smooth" });
+    }
+</script>
+
+<div class="post-container">
+    <h2 class="post-title">{{ post.title }}</h2>
+    <p class="post-details"><strong>Author:</strong> {{ post.author }} | <strong>Published on:</strong> {{ post.created_at }}</p>
+    <div class="post-content">{{ post.content }}</div>
+
+    <div class="comments-section">
+        <h3>Comments</h3>
+        <ul class="list-group">
+            {% for comment in comments %}
+            <li class="list-group-item">
+                <strong>{{ comment.user }}:</strong> {{ comment.content }}
+                <small class="text-muted">({{ comment.created_at }})</small>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="comment-form" class="comment-form">
+        <h4>Add a Comment</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary w-100">Add Comment</button>
+        </form>
+    </div>
+
+    <a href="{% url 'Blog_App:post_list' %}" class="btn btn-secondary d-block text-center">Back to Posts</a>
+</div>
+<button class="btn btn-link text-primary mt-3" onclick="scrollToCommentForm()">Go to Comment Form</button>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Friend Request{% endblock %}
+
+{% block content %}
+    <h2>Send Friend Request</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="friend">Select a Friend:</label>
+            <select name="friend" class="form-control" required>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Send Request</button>
+    </form>
+{% endblock %}

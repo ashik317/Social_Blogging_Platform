@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Social Blogging Platform{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        margin-top: 50px;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-color: #bee5eb;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+
+    .form-container {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+    }
+
+    .form-container .form-label {
+        font-weight: bold;
+    }
+
+    .form-container textarea {
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .form-container button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="container dashboard-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Dashboard Header -->
+            <div class="card">
+                <div class="card-header">
+                    Welcome to Your Dashboard, {{ user.first_name }}!
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Hello, {{ user.first_name }}!</strong> This is your personal dashboard where you can manage your posts and messages.
+                    </div>
+                    
+                    <!-- Minimal Message Form for Testing -->
+                    <div class="form-container">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Friend Requests{% endblock %}
+
+{% block content %}
+    <h2>Friend Requests</h2>
+    <ul>
+        {% for request in requests %}
+            <li>
+                {{ request.user.username }}
+                <a href="{% url 'Friendship_Features:accept_friend_request' request_id=request.id %}">Accept</a>
+                <a href="{% url 'Friendship_Features:reject_friend_request' request_id=request.id %}">Reject</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

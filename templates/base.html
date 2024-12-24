@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Social Blogging Platform{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .navbar {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #007bff !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #0056b3 !important;
+        }
+
+        footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            background-color: #f8f9fa;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #343a40;
+        }
+
+        a {
+            color: #007bff;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 15px 0;
+        }
+
+    </style>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'App_Login:login' %}">Social Blogging</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- General Navigation -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Post List</a>
+                    </li>
+                    <!-- Friendship Features Links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Friendship_Features:friend_list' %}">Friend List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Friendship_Features:post_list' %}">All Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Friendship_Features:friend_requests_list' %}">Friend Requests</a>
+                    </li>
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'App_Login:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'App_Login:signup' %}">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'App_Login:dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'App_Login:logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        {% block content %}
+
+        <!-- Error Message Template (e.g., when trying to send a friend request to yourself) -->
+        {% if message %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% endif %}
+        
+        {% block friendship_content %}{% endblock %}
+
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5 py-4 bg-light">
+        <p>&copy; 2024 Social Blogging Platform</p>
+    </footer>
+
+</body>
+</html>

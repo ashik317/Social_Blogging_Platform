@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - Social Blogging Platform{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-50">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 10px;">
+        <h2 class="text-center mb-4" style="font-family: Arial, sans-serif;">Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group mb-3">
+                <label for="id_first_name" class="form-label" style="font-weight: bold; color: #555;">First Name</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="id_last_name" class="form-label" style="font-weight: bold; color: #555;">Last Name</label>
+                {{ form.last_name }}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="id_email" class="form-label" style="font-weight: bold; color: #555;">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="id_password" class="form-label" style="font-weight: bold; color: #555;">Password</label>
+                {{ form.password }}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="id_confirm_password" class="form-label" style="font-weight: bold; color: #555;">Confirm Password</label>
+                {{ form.confirm_password }}
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block w-100" style="background-color: #28a745; border: none; padding: 12px;">Register</button>
+        </form>
+        
+        <div class="text-center mt-3">
+            <p style="font-size: 14px; color: #555;">Already have an account? <a href="{% url 'App_Login:login' %}" class="text-decoration-none" style="color: #007bff;">Login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Body styles to remove extra space and make design clean */
+    body {
+        background-color: #f9f9f9;
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        background-color: transparent;
+    }
+
+    .card {
+        border: none;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .text-center p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .text-center a {
+        color: #007bff;
+    }
+
+    .text-center a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
